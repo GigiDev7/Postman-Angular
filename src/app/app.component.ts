@@ -3,8 +3,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'postman-angular';
+  public activeParam: string = 'Query Params';
+
+  public onActiveParamChange = (val: string) => {
+    this.activeParam = val;
+  };
+
+  constructor() {}
 }
