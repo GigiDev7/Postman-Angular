@@ -3,6 +3,8 @@
     <form>
       <div class="mb-4 flex">
         <select
+          [value]="method"
+          (input)="onMethodChange($event)"
           class="flex flex-grow-0 w-auto border-[1px] py-2 px-1 outline-0"
         >
           <option value="GET">GET</option>
@@ -13,6 +15,8 @@
         </select>
 
         <input
+          [value]="url"
+          (input)="onUrlChange($event)"
           type="text"
           class="w-[400px] pl-1 outline-0 border-[1px]"
           placeholder="http://example.com"
@@ -68,7 +72,17 @@
         </ul>
       </div>
 
+      <div *ngIf="activeParam === 'Query Params'">
+        <app-parameters *ngFor="let param of params"></app-parameters>
+      </div>
+
+      <div *ngIf="activeParam === 'Headers'">
+        <app-parameters *ngFor="let header of headers"></app-parameters>
+      </div>
+
       <button
+        *ngIf="activeParam !== 'JSON'"
+        (click)="onAddClick()"
         type="button"
         class="mt-8 text-green-500 border-green-500 border-[1px] px-4 py-1 rounded font-semibold"
       >
