@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from './app.service';
 import { v4 as uuidv4 } from 'uuid';
+import { IParam } from './models/param.model';
+import { IHeader } from './models/header.model';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +13,8 @@ export class AppComponent implements OnInit {
   public activeParam: string = 'Query Params';
   public url: string = '';
   public method: string = 'GET';
-  public params: { id: string; paramKey: string; paramVal: string }[] = [];
-  public headers: { id: string; headerKey: string; headerVal: string }[] = [];
+  public params: IParam[] = [];
+  public headers: IHeader[] = [];
 
   public onActiveParamChange = (val: string) => {
     this.activeParam = val;
@@ -20,7 +22,6 @@ export class AppComponent implements OnInit {
 
   public onUrlChange = (e: Event) => {
     this.url = (e.target as HTMLInputElement).value;
-    console.log(this.url);
   };
 
   public onMethodChange = (e: Event) => {

@@ -73,11 +73,17 @@
       </div>
 
       <div *ngIf="activeParam === 'Query Params'">
-        <app-parameters *ngFor="let param of params"></app-parameters>
+        <app-parameters
+          *ngFor="let param of params"
+          [param]="param"
+        ></app-parameters>
       </div>
 
       <div *ngIf="activeParam === 'Headers'">
-        <app-parameters *ngFor="let header of headers"></app-parameters>
+        <app-parameters
+          *ngFor="let header of headers"
+          [param]="header"
+        ></app-parameters>
       </div>
 
       <button
