@@ -76,6 +76,7 @@
         <app-parameters
           *ngFor="let param of params"
           [param]="param"
+          [activeParam]="activeParam"
         ></app-parameters>
       </div>
 
@@ -83,6 +84,7 @@
         <app-parameters
           *ngFor="let header of headers"
           [param]="header"
+          [activeParam]="activeParam"
         ></app-parameters>
       </div>
 
