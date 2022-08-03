@@ -3,6 +3,7 @@ import { AppService } from './app.service';
 import { v4 as uuidv4 } from 'uuid';
 import { IParam } from './models/param.model';
 import { IHeader } from './models/header.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,7 @@ import { IHeader } from './models/header.model';
 })
 export class AppComponent implements OnInit {
   public activeParam: string = 'Query Params';
-  public url: string = '';
+  public url = new BehaviorSubject<string>('');
   public method: string = 'GET';
   public params: IParam[] = [];
   public headers: IHeader[] = [];
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
   };
 
   public onUrlChange = (e: Event) => {
-    this.url = (e.target as HTMLInputElement).value;
+    this.url.next((e.target as HTMLInputElement).value);
   };
 
   public onMethodChange = (e: Event) => {
@@ -36,6 +37,11 @@ export class AppComponent implements OnInit {
       const newParam = { id: uuidv4(), headerKey: '', headerVal: '' };
       this.appService.headers.next([...this.headers, newParam]);
     }
+  };
+
+  public handleSubmit = () => {
+    console.log(this.appService.params.getValue());
+    console.log(this.appService.headers.getValue());
   };
 
   constructor(private appService: AppService) {}

@@ -1,6 +1,6 @@
 <div class="flex justify-center mt-12">
   <div>
-    <form>
+    <form (ngSubmit)="handleSubmit()">
       <div class="mb-4 flex">
         <select
           [value]="method"
@@ -15,7 +15,7 @@
         </select>
 
         <input
-          [value]="url"
+          [value]="url | async"
           (input)="onUrlChange($event)"
           type="text"
           class="w-[400px] pl-1 outline-0 border-[1px]"
@@ -78,6 +78,7 @@
           [param]="param"
           [activeParam]="activeParam"
           [params]="params"
+          [url]="url"
         ></app-parameters>
       </div>
 
@@ -87,6 +88,7 @@
           [param]="header"
           [activeParam]="activeParam"
           [headers]="headers"
+          [url]="url"
         ></app-parameters>
       </div>
 

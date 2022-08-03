@@ -1,11 +1,21 @@
 <div class="mt-2">
   <div>
     <input
+      [value]="
+        activeParam === 'Headers' ? $any(param).headerKey : $any(param).paramKey
+      "
+      [name]="activeParam === 'Headers' ? 'headerKey' : 'paramKey'"
+      (input)="onParamsChange($event)"
       type="text"
       placeholder="Key"
       class="border-[1px] outline-1 outline-blue-600 py-1"
     />
     <input
+      [value]="
+        activeParam === 'Headers' ? $any(param).headerVal : $any(param).paramVal
+      "
+      [name]="activeParam === 'Headers' ? 'headerVal' : 'paramVal'"
+      (input)="onParamsChange($event)"
       type="text"
       placeholder="Value"
       class="border-[1px] outline-1 outline-blue-600 py-1"
