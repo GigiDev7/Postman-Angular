@@ -16,6 +16,8 @@ export class AppComponent implements OnInit {
   public method: string = 'GET';
   public params: IParam[] = [];
   public headers: IHeader[] = [];
+  public data: any = null;
+  public requestBody: any = null;
 
   public onActiveParamChange = (val: string) => {
     this.activeParam = val;
@@ -40,8 +42,18 @@ export class AppComponent implements OnInit {
   };
 
   public handleSubmit = () => {
-    console.log(this.appService.params.getValue());
-    console.log(this.appService.headers.getValue());
+    this.appService
+      .makeRequest(
+        (this.method as any).toLowerCase(),
+        this.url.getValue(),
+        this.headers,
+        this.requestBody
+      )
+      .subscribe({
+        next: (res) => {
+          console.log(res);
+        },
+      });
   };
 
   constructor(private appService: AppService) {}
