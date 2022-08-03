@@ -71,6 +71,17 @@ export class AppComponent implements OnInit {
             ),
           };
         },
+        error: (err) => {
+          this.data = 'Error';
+          for (const key of (err as any).headers.keys()) {
+            this.responseHeaders[key] = (err as any).headers.get(key);
+          }
+          this.responseDetails = {
+            status: (err as any).status,
+            time: '',
+            size: prettyBytes(JSON.stringify(this.responseHeaders).length),
+          };
+        },
       });
   };
 
