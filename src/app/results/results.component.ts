@@ -9,7 +9,7 @@ export class ResultsComponent implements OnInit {
   public activeParam: string = 'Body';
   @Input() data!: any;
   @Input() responseHeaders!: any;
-  @Input() responseDetails!: { status: string; time: string; size: string };
+  @Input() responseDetails!: { status: string; time: number; size: string };
 
   public onActiveParamChange = (val: string) => {
     this.activeParam = val;

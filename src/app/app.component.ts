@@ -19,9 +19,9 @@ export class AppComponent implements OnInit {
   public headers: IHeader[] = [];
   public requestBody: any = null;
   public data: any = null;
-  public responseDetails: { status: string; size: string; time: string } = {
+  public responseDetails: { status: string; size: string; time: number } = {
     status: '',
-    time: '',
+    time: 0,
     size: '',
   };
   public responseHeaders: any = {};
@@ -64,7 +64,7 @@ export class AppComponent implements OnInit {
           }
           this.responseDetails = {
             status: (res as any).status,
-            time: '',
+            time: (res as any).endTime * 1 - (res as any).startTime * 1,
             size: prettyBytes(
               JSON.stringify(this.data).length +
                 JSON.stringify(this.responseHeaders).length
@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
           }
           this.responseDetails = {
             status: (err as any).status,
-            time: '',
+            time: (err as any).endTime * 1 - (err as any).startTime * 1,
             size: prettyBytes(JSON.stringify(this.responseHeaders).length),
           };
         },
