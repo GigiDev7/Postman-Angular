@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { IParam } from './models/param.model';
 import { IHeader } from './models/header.model';
 import { BehaviorSubject } from 'rxjs';
+import prettyBytes from 'pretty-bytes';
 
 @Component({
   selector: 'app-root',
@@ -16,8 +17,14 @@ export class AppComponent implements OnInit {
   public method: string = 'GET';
   public params: IParam[] = [];
   public headers: IHeader[] = [];
-  public data: any = null;
   public requestBody: any = null;
+  public data: any = null;
+  public responseDetails: { status: string; size: string; time: string } = {
+    status: '',
+    time: '',
+    size: '',
+  };
+  public responseHeaders: any = {};
 
   public onActiveParamChange = (val: string) => {
     this.activeParam = val;
@@ -51,7 +58,18 @@ export class AppComponent implements OnInit {
       )
       .subscribe({
         next: (res) => {
-          console.log(res);
+          this.data = (res as any).body;
+          for (const key of (res as any).headers.keys()) {
+            this.responseHeaders[key] = (res as any).headers.get(key);
+          }
+          this.responseDetails = {
+            status: (res as any).status,
+            time: '',
+            size: prettyBytes(
+              JSON.stringify(this.data).length +
+                JSON.stringify(this.responseHeaders).length
+            ),
+          };
         },
       });
   };

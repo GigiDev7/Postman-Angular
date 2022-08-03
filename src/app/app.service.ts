@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { IHeader } from './models/header.model';
 import { IParam } from './models/param.model';
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +18,10 @@ export class AppService {
     body: any
   ) {
     if (method === 'get' || method === 'delete') {
-      return this.http[method](url, { headers });
+      return this.http[method](url, {
+        headers,
+        observe: 'response' as 'body',
+      });
     } else {
       return this.http[method](url, body, { headers });
     }

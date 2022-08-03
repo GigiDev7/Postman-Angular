@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-results',
@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultsComponent implements OnInit {
   public activeParam: string = 'Body';
+  @Input() data!: any;
+  @Input() responseHeaders!: any;
+  @Input() responseDetails!: { status: string; time: string; size: string };
 
   public onActiveParamChange = (val: string) => {
     this.activeParam = val;

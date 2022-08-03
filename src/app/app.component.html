@@ -102,8 +102,12 @@
       </button>
     </form>
 
-    <div>
-      <app-results></app-results>
+    <div *ngIf="data">
+      <app-results
+        [responseDetails]="responseDetails"
+        [responseHeaders]="responseHeaders"
+        [data]="data"
+      ></app-results>
     </div>
   </div>
 </div>
