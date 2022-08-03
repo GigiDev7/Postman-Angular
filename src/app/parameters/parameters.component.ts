@@ -21,6 +21,24 @@ export class ParametersComponent implements OnInit {
     if (this.activeParam === 'Query Params') {
       const filtered = this.params.filter((el) => el.id !== this.param.id);
       this.appService.params.next(filtered);
+      const str = `${(this.param as IParam).paramKey}=${
+        (this.param as IParam).paramVal
+      }`;
+      const currentUrl = this.url.getValue();
+      const indx = currentUrl.indexOf(str);
+      if (currentUrl[indx - 1] === '?') {
+        this.url.next(
+          currentUrl.slice(0, indx - 1) +
+            (currentUrl.slice(indx + str.length + 1) ? '?' : '') +
+            currentUrl.slice(indx + str.length + 1)
+        );
+      } else if (str === '=') {
+        this.url.next(currentUrl);
+      } else {
+        this.url.next(
+          currentUrl.slice(0, indx - 1) + currentUrl.slice(indx + str.length)
+        );
+      }
     } else if (this.activeParam === 'Headers') {
       const filtered = this.headers.filter((el) => el.id !== this.param.id);
       this.appService.headers.next(filtered);
