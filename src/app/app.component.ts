@@ -31,17 +31,21 @@ export class AppComponent implements OnInit {
   public onAddClick = () => {
     if (this.activeParam === 'Query Params') {
       const newParam = { id: uuidv4(), paramKey: '', paramVal: '' };
-      this.appService.params.push(newParam);
+      this.appService.params.next([...this.params, newParam]);
     } else if (this.activeParam === 'Headers') {
       const newParam = { id: uuidv4(), headerKey: '', headerVal: '' };
-      this.appService.headers.push(newParam);
+      this.appService.headers.next([...this.headers, newParam]);
     }
   };
 
   constructor(private appService: AppService) {}
 
   public ngOnInit(): void {
-    this.params = this.appService.params;
-    this.headers = this.appService.headers;
+    this.appService.params.subscribe({
+      next: (res) => (this.params = res),
+    });
+    this.appService.headers.subscribe({
+      next: (res) => (this.headers = res),
+    });
   }
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { IHeader } from './models/header.model';
 import { IParam } from './models/param.model';
 
@@ -6,8 +7,8 @@ import { IParam } from './models/param.model';
   providedIn: 'root',
 })
 export class AppService {
-  public params: IParam[] = [];
-  public headers: IHeader[] = [];
+  public params = new BehaviorSubject<IParam[]>([]);
+  public headers = new BehaviorSubject<IHeader[]>([]);
 
   constructor() {}
 }

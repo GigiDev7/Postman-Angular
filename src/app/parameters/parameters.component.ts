@@ -11,16 +11,16 @@ import { IParam } from '../models/param.model';
 export class ParametersComponent implements OnInit {
   @Input() param!: IParam | IHeader;
   @Input() activeParam!: string;
+  @Input() params!: IParam[];
+  @Input() headers!: IHeader[];
 
   public onRemoveClick = () => {
     if (this.activeParam === 'Query Params') {
-      this.appService.params = this.appService.params.filter(
-        (el) => el.id !== this.param.id
-      );
+      const filtered = this.params.filter((el) => el.id !== this.param.id);
+      this.appService.params.next(filtered);
     } else if (this.activeParam === 'Headers') {
-      this.appService.headers = this.appService.headers.filter(
-        (el) => el.id !== this.param.id
-      );
+      const filtered = this.headers.filter((el) => el.id !== this.param.id);
+      this.appService.headers.next(filtered);
     }
   };
 
