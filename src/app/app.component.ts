@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   public method: string = 'GET';
   public params: IParam[] = [];
   public headers: IHeader[] = [];
-  public requestBody: any = null;
+  public requestBody: any = '{}';
   public data: any = null;
   public responseDetails: { status: string; size: string; time: number } = {
     status: '',
@@ -25,6 +25,8 @@ export class AppComponent implements OnInit {
     size: '',
   };
   public responseHeaders: any = {};
+
+  public editorOptions = { theme: 'default', language: 'json' };
 
   public onActiveParamChange = (val: string) => {
     this.activeParam = val;
@@ -54,7 +56,7 @@ export class AppComponent implements OnInit {
         (this.method as any).toLowerCase(),
         this.url.getValue(),
         this.headers,
-        this.requestBody
+        JSON.parse(this.requestBody)
       )
       .subscribe({
         next: (res) => {

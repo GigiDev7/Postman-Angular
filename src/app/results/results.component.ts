@@ -11,6 +11,13 @@ export class ResultsComponent implements OnInit {
   @Input() responseHeaders!: any;
   @Input() responseDetails!: { status: string; time: number; size: string };
 
+  public editorOptions = {
+    theme: 'default',
+    language: 'json',
+  };
+
+  public stringify = (obj: any) => JSON.stringify(obj);
+
   public onActiveParamChange = (val: string) => {
     this.activeParam = val;
   };

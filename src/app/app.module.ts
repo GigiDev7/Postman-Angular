@@ -12,6 +12,8 @@ import { ParametersComponent } from './parameters/parameters.component';
 import { ResultsComponent } from './results/results.component';
 import { AppInterceptor } from './app.interceptor';
 
+import { MonacoEditorModule } from '@materia-ui/ngx-monaco-editor';
+
 @NgModule({
   declarations: [AppComponent, ParametersComponent, ResultsComponent],
   imports: [
@@ -21,6 +23,7 @@ import { AppInterceptor } from './app.interceptor';
     CommonModule,
     HttpClientModule,
     FormsModule,
+    MonacoEditorModule,
   ],
   providers: [
     {

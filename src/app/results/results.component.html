@@ -50,4 +50,13 @@
       <p class="w-[40%]">{{ item.value }}</p>
     </div>
   </div>
+
+  <div *ngIf="data && activeParam === 'Body'">
+    <ngx-monaco-editor
+      class="h-40 w-[500px] block"
+      [ngModel]="stringify(data)"
+      [options]="editorOptions"
+    >
+    </ngx-monaco-editor>
+  </div>
 </div>
